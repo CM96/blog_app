@@ -1,8 +1,8 @@
 <% include ./partials/header %>
 
-<div class="ui main text container segment">
-    <h1 class="ui huge header">New blog</h1>
-    <form action="/blogs" method="POST" class="ui form">
+<div class="container">
+    <h1 class="display-2 header">New blog</h1>
+    <form action="/blogs" method="POST" class="form container">
         <div class="field">
             <label for="">Title</label>
             <input type="text" name="blog[title]" placeholder="title">
@@ -17,7 +17,7 @@
             <label for="">Body</label>
             <textarea name="blog[body]" required></textarea>
         </div>
-        <input type="submit" class="ui inverted big green button">
+        <input type="submit" class="btn btn-dark rounded-pill">
     </form>
 </div>
 <% include ./partials/footer %>

@@ -20,6 +20,7 @@ nav > a i {
 /* HEADER */
 .container > h1{
     font-weight: 600;
+    margin:3rem;
 
 }
 .content {
@@ -27,7 +28,7 @@ nav > a i {
     font-size:2rem;
     padding:1rem 3rem;
     border-radius: 2rem;
-
+    overflow: hidden;
 }
 .items .item{
     margin: 3rem;
@@ -44,10 +45,11 @@ nav > a i {
 
 }
 .blog__content .header{
-    font-size:1.8rem;
-    color: blue;
+    font-size:1.7rem;
+    color:black;
     text-decoration: none;
-    font-weight: 500;
+    font-weight: 600;
+    margin-left:-1rem;
 }
 .item .blog__description{
     font-size:1.6rem;
@@ -58,5 +60,90 @@ nav > a i {
 }
 .item .blog__extra a{
     font-size:1.6rem;
-    padding:1.2rem;
+    padding:.5rem;
+    width:15rem;
 }
+
+
+/* NEW */
+
+.form{
+    border:2px solid black;
+    border-radius: 2rem;
+    font-size:1.7rem;
+    padding:3rem;
+}
+input, label{
+    display: block;
+}
+.form input[type="submit"]{
+    font-size:1.7rem;
+    margin-left: 1.4rem;
+
+}
+.form .field{
+    padding: 1.5rem;
+}
+.field input[type="text"]{
+    /* margin-left:7rem; */
+    width:40%;
+    padding:.7rem;
+    border-radius: 1.5rem;
+    /* background-color: black; */
+}
+.field textarea{
+    width:40%;
+    padding:1rem;
+    border-radius: 1.5rem;
+    /* height:5rem; */
+}
+/* SHOW ROUTE*/
+.content{
+    margin-bottom: 2rem;
+}
+.item .item__image{
+    width:50rem;
+    height:50rem;
+}
+.item a{
+    font-size:1.6rem;
+}
+.item a{
+    font-size:1.6rem;
+    padding: 1rem;
+    width:10rem;
+
+}
+.item form button{
+    font-size: 1.6rem;
+    padding:1rem;
+    width:10rem;
+}
+/* RESPONSIVENESS */
+
+    @media screen and (max-width: 500px) {
+    }
+
+    @media screen and (max-width: 768px) {
+        .item .blog__image{
+            overflow: hidden;
+        }
+        .item .blog__image img{
+            width:20rem;
+            height:20rem;
+        }
+
+    }
+  
+    @media screen and (min-width: 769px) and (max-width: 1170px) {
+        .item .blog__image{
+            overflow: hidden;
+        }
+        .item .blog__image img{
+            width:35rem;
+            height:35rem;
+        }
+    
+    }
+    @media screen and (min-width: 1171px) {
+    }
