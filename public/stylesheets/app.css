@@ -33,12 +33,14 @@ nav > a i {
 .items .item{
     margin: 3rem;
     border:2px solid black;
-    padding: 2.5rem;
+    padding:5rem;
     border-radius: 2rem;
 }
 .item .blog__image img{
-    width:50rem;
+    width:100%;
     height:50rem;
+    border-radius: 2rem;
+
 }
 .item .blog__content{
     font-size:1.6rem;
@@ -88,22 +90,38 @@ input, label{
     /* margin-left:7rem; */
     width:40%;
     padding:.7rem;
-    border-radius: 1.5rem;
+    border-radius: .8rem;
+}
+
+.field input[type="text"]:focus{
+    /* margin-left:7rem; */
+    outline: none;
+    border-bottom: 2px solid #2b2a2a;
+
+    box-shadow:0 .5rem 2rem rgb(192, 191, 191);
     /* background-color: black; */
 }
 .field textarea{
     width:40%;
     padding:1rem;
-    border-radius: 1.5rem;
-    /* height:5rem; */
+    border-radius: .8rem;
 }
+
+.field textarea:focus{
+    outline: none;
+    border-bottom: 2px solid #2b2a2a;
+    box-shadow:0 .5rem 2rem rgb(192, 191, 191)
+}
+
 /* SHOW ROUTE*/
 .content{
     margin-bottom: 2rem;
+    padding:3rem;
 }
 .item .item__image{
-    width:50rem;
+    width:100%;
     height:50rem;
+    border-radius: 2rem;
 }
 .item a{
     font-size:1.6rem;
@@ -112,6 +130,9 @@ input, label{
     font-size:1.6rem;
     padding: 1rem;
     width:10rem;
+
+}
+.item .item__content{
 
 }
 .item form button{
@@ -129,7 +150,7 @@ input, label{
             overflow: hidden;
         }
         .item .blog__image img{
-            width:20rem;
+            width:100%;
             height:20rem;
         }
 
@@ -140,7 +161,7 @@ input, label{
             overflow: hidden;
         }
         .item .blog__image img{
-            width:35rem;
+            width:100%;
             height:35rem;
         }
     
