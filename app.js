@@ -1,9 +1,18 @@
 const express     =  require("express"),
       app         =  express(),
       bodyParser  =  require("body-parser"),
-      mongoose    =  require("mongoose");
-      methodOverride=require("method-override");
-      expressSanitizer=require("express-sanitizer");
+      mongoose    =  require("mongoose"),
+      methodOverride=require("method-override"),
+      expressSanitizer=require("express-sanitizer"),
+      passport    = require('passport'),
+      LocalStrategy = require('passport-local'),
+      session       = require('express-session'),
+      flash         = require ('connect-flash'),
+      passportConfig = require ('./passport-config'),
+      bcrypt        = require ('bcryptjs'),
+      checkAuth    = require('./checkAuth'),
+      Blog        = require('./models/blog'),
+      User        = require ('./models/user');
 
 mongoose.connect('mongodb://localhost/restful_blog_app', { useNewUrlParser: true });
 mongoose.set('useFindAndModify', false);
@@ -12,22 +21,32 @@ app.use(express.static("public"));
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(expressSanitizer());
 app.use(methodOverride("_method"));
+app.use(flash());
+//INTIALIZING EXPRESS SESSION
 
+app.use(session({
+    secret: 'daily dose of happiness',
+    saveUninitialized: false,
+    resave: false
+}));
 
-var blogSchema=new mongoose.Schema({
-    title:String,
-    image:String,
-    body:String,
-    created:{type:Date, default:Date.now}
+// passport coming in....has to be after express session
+app.use(passport.initialize());
+app.use(passport.session());
+app.use(function(req, res, next){ //will be use in every route
+    res.locals.currentUser=req.user;
+    res.locals.error=req.flash("error");
+    res.locals.success=req.flash("success");
+    
+    next();//important for middlewares!!!
 });
-var Blog=mongoose.model("Blog", blogSchema);
-
+passportConfig(passport)
 
 //RESTFUL ROUTES
-app.get("/", (req,res)=>{
-    res.redirect("/blogs");
+app.get("/", checkAuth.isLoggedIn, (req,res)=>{
+    res.render("home");
 });
-app.get("/blogs", (req,res)=>{
+app.get("/blogs", checkAuth.isLoggedIn,(req,res)=>{
     Blog.find({},(err,blogs)=>{
         if(err) {
             console.log(err);
@@ -38,24 +57,23 @@ app.get("/blogs", (req,res)=>{
 });
 
 //NEW ROUTE
-app.get("/blogs/new", (req,res)=>{
+app.get("/blogs/new", checkAuth.isLoggedIn,(req,res)=>{
     res.render("new");
 });
 
 //CREATE ROUTE
-app.post("/blogs", (req,res)=>{
+app.post("/blogs",checkAuth.isLoggedIn, (req,res)=>{
     //create blog
-    req.body.blog.body =req.sanitize(req.body.blog.body);//?
+    req.body.blog.body =req.sanitize(req.body.blog.body);//? could use destructuring
     Blog.create(req.body.blog,(err,newblog)=>{
         if(err) {
             res.render("new");
         }else{
-            //redirect to the index
             res.redirect("/blogs");
         }
     });
 });
-app.get("/blogs/:id", (req,res)=>{
+app.get("/blogs/:id", checkAuth.isLoggedIn,(req,res)=>{
    Blog.findById(req.params.id, (err,foundBlog)=>{
         if(err) {
             res.redirect("/blogs");
@@ -66,12 +84,11 @@ app.get("/blogs/:id", (req,res)=>{
    });
 });
 //EDIT ROUTE
-app.get("/blogs/:id/edit", (req,res)=>{
+app.get("/blogs/:id/edit", checkAuth.isLoggedIn,(req,res)=>{
     Blog.findById(req.params.id, (err,foundBlog)=>{
          if(err) {
              res.redirect("/blogs");
          }else{
-             //redirect to the index
              res.render("edit", {blog: foundBlog});
          }
     });
@@ -79,9 +96,8 @@ app.get("/blogs/:id/edit", (req,res)=>{
 
  //UPDATE ROUTE
 
- app.put("/blogs/:id", (req,res)=>{
+ app.put("/blogs/:id", checkAuth.isLoggedIn,(req,res)=>{
     req.body.blog.body =req.sanitize(req.body.blog.body);
-
     Blog.findByIdAndUpdate(req.params.id, req.body.blog, (err,updatedBlog)=>{
          if(err) {
              res.redirect("/blogs");
@@ -92,18 +108,96 @@ app.get("/blogs/:id/edit", (req,res)=>{
  });
  //DELETE ROUTE
 
-app.delete("/blogs/:id", (req,res)=>{
+app.delete("/blogs/:id", checkAuth.isLoggedIn,(req,res)=>{
     Blog.findByIdAndRemove(req.params.id, (err,foundBlog)=>{
          if(err) {
              res.redirect("/blogs");
          }else{
-             //redirect to the index
              res.redirect("/blogs");
          }
     });
  });
 
+ //LOGIN ROUTES
+ //get: get login page
+ app.get('/login',checkAuth.noReturn, (req, res)=>{
+     res.render('login');
+ });
+ //post: authenticate user
+// app.post('/login',
+//   passport.authenticate('local', 
+//   { successRedirect: '/',
+//     failureRedirect: '/login',
+//     failureFlash: true })
+// );
+app.post('/login', passport.authenticate("local",{
+    successRedirect:"/",
+    failureRedirect:"/login"
+
+}),
+(req,res)=>{
+    res.render('login');
+});
+app.get('/logout',checkAuth.isLoggedIn, (req,res)=>{
+    req.logOut();
+    req.flash('logged out');
+    res.redirect('/login')
+});
+ // REGISTER ROUTES
+ app.get('/register', (req, res)=>{
+    res.render('register');
+});
+ //post: register user
+ app.post('/register', (req, res)=>{
+     const {username, email, password, password2}= req.body;
+     const errors=[];
+      //error checking
+    if(!email || !username || !password2 || !password) 
+        errors.push('Missing information in some fields');
+    if(password !=password2)
+        errors.push('password do not match');
+    if(password.length< 6)
+        errors.push('password too short');
+    if(errors.length!=0){
+        //get out and redirect
+        console.log(errors);
+        res.redirect('/register');
+    }
+    //otherwise check if user exists
+    else{
+        User.findOne({email:email})
+        .then(user=>{
+            if(user) {
+                console.log('user exists');//check if there is a user in the db with that email
+            }
+            let newUser=new User({
+                username,
+                email,
+                password,
+                password2
+            });
+            bcrypt.genSalt(10, function(err, salt) {
+                bcrypt.hash(password, salt, function(err, hash) {
+                    if(err) console.log(err);
+                    // Store hash in your password DB.
+                    newUser.password=hash;
+                    //insert user in database
+                    newUser.save()
+                    .then(user=>{
+                        //redirect to login page so user could login
+                        res.redirect('/login');
+                    })
+                    .catch(err=>console.log(err))
+                });
+            });
+           
+        })
+        .catch(err=>console.log(err));//error tr
+    // res.redirect('/login');
+    }
+});
 //server listening
+
 const port = process.env.PORT || 3000;
 app.listen(port, function () {
   console.log("Server is running ");
