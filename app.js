@@ -43,10 +43,10 @@ app.use(function(req, res, next){ //will be use in every route
 passportConfig(passport)
 
 //RESTFUL ROUTES
-app.get("/", checkAuth.isLoggedIn, (req,res)=>{
+app.get("/", (req,res)=>{
     res.render("home");
 });
-app.get("/blogs", checkAuth.isLoggedIn,(req,res)=>{
+app.get("/blogs",(req,res)=>{
     Blog.find({},(err,blogs)=>{
         if(err) {
             console.log(err);

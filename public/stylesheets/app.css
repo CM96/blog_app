@@ -15,13 +15,108 @@ body{
 }
 body section{
     width: 100%;
-    height: 93.2%;
-    background-image: url(../images/home1.jpeg);
-    background-size: cover;
-    background-repeat: no-repeat;
     overflow-y: hidden;
+}
+/* HOME PAGE */
+.home{
+    width: 100vw;
+    height: 100vh;
+    background-image: url(../images/home_womanDog.svg);
+    background-size: contain;
+    background-position: right;
+    background-repeat: no-repeat;
+    padding: 1.5rem;
+}
+/* NAVIGATION */
+.navigation{
+    padding:1.5rem 2rem;
+    position: fixed;
+    display: flex;
+    align-items: center;
+    background-color:#6c63ff ;
+    /* #6c63ff */
+    font-size: 1.7rem;
+    z-index: 4;
+    width: 100%;
+}
+
+.navigation .nav-item{
+    position: relative;
+    margin-right: 2rem;
+    color:#eee;
 
 }
+.nav-item::after{
+    content: '';
+    position: absolute;
+    left: 45%;
+    bottom: 0;
+    width: 20%;
+    height: .3rem;
+    opacity: 0;
+    /* background-color:rgb(92, 84, 214); */
+    background-color: #eee;
+    transition: all .3s ease-in;
+}
+/* .navigation.scrolled{
+    background-color: rgb(92, 84, 214);
+    transition: all .5s ease-in-out;
+} */
+.nav-item:hover{
+    text-decoration: none;
+}
+.nav-item:hover::after{
+    transform: scaleX(5);
+    opacity: 1;
+}
+
+/* WELCOME TEXT */
+
+.home__text{
+    width: 30%;
+    height: 50%;
+    margin-top:10%;
+    padding: 1.5rem;
+}
+.home__button{
+    position: relative;
+    height: 3.5rem;
+    width: 12rem;
+    padding: .4rem auto;
+    font-size: 1.6rem;
+    border:.2rem solid rgba(36, 26, 226, 0.7);
+    box-shadow: .2rem .1rem .4rem rgba(108, 99, 255,0.7); /* color-primary*/
+
+}
+.home__button a {
+    position: relative;
+    z-index: 1;
+    display: block;
+    padding-top: .3rem;
+    width: 100%;
+    height: 100%;
+    color: #000;
+
+}
+.home__button a:after{
+    position: absolute;
+    content: '';
+    width: 100%;
+    height: 0;
+    z-index: -1;
+    background-color:rgb(71, 59, 241) ;
+    left: 0;
+    bottom: 0;
+    transition: all .3s ease-in;
+}
+.home__button:hover > a {
+    text-decoration: none;
+    color: #ffffffff;
+}
+.home__button:hover > a:after {
+    height: 100%;
+}
+/* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
 /* LOGIN FORM */
 #form-header{
     font-size: 3.5rem;
@@ -41,32 +136,28 @@ body section{
 #login-form h1 {
     color: inherit;
 }
-
-/* NAVIGATION */
-nav {
-    font-size:1.6rem;
-}
-nav > a i {
-    font-size:1.7rem;
-}
+/* BLOGS PAGE */
 /* HEADER */
-.container > h1{
-    font-weight: 600;
-    margin:3rem;
-
-}
 .content {
-    border:2px solid #000000;
     font-size:2rem;
-    padding:1rem 3rem;
+    padding:1rem 2rem;
     border-radius: 2rem;
     overflow: hidden;
 }
+.items {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    margin-top: 2rem;
+    box-shadow: .3rem .3rem .7rem rgba(120,120,120,0.7);
+
+}
 .items .item{
     margin: 3rem;
-    border:2px solid black;
     padding:5rem;
     border-radius: 2rem;
+    position: relative;
+    height:40rem;
+    box-shadow: .3rem .3rem .7rem rgba(120,120,120,0.7);
 }
 .item .blog__image img{
     width:100%;
@@ -74,9 +165,24 @@ nav > a i {
     border-radius: 2rem;
 
 }
+.items .item .blog__image{
+    position: absolute;
+    width: 50%;
+    height: 50%;
+    left: -2.5rem;
+    top:25%;
+}
+.items .item .blog__image img{
+    width: 100%;
+    height: 100%;
+}
 .item .blog__content{
     font-size:1.6rem;
-
+    position: absolute;
+    width: 50%;
+    height: 50%;
+    right: 0;
+    top:20%;
 }
 .blog__content .header{
     font-size:1.7rem;
@@ -95,7 +201,6 @@ nav > a i {
 .item .blog__extra a{
     font-size:1.6rem;
     padding:.5rem;
-    width:15rem;
 }
 
 

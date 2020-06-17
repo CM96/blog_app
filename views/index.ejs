@@ -1,13 +1,11 @@
 <% include ./partials/header %>
-
-<div class="container" > <!--ui main text id="indexArea"-->
-    <h1 class="display-2">
+    <div class="content container"> 
+        <!-- <h1 class="display-2">
         RESTful Blog App <i class="fas fa-dog"></i>
-    <h1>
-    <div class="content container"> <!--ui top attached segment-->
-        <div class="items"><!--ui divided items-->
-            <% blogs.forEach((blog) => {%>
-                <div class="item" >
+        <h1> -->
+        <div class="items container">
+            <%blogs.forEach((blog) => {%>
+                <div class="item">
                     <div class="blog__image">
                         <img src="<%= blog.image%>" alt="blog image" >
                     </div>
@@ -16,18 +14,18 @@
                         <div class="meta mt-3">
                             <span><%= blog.created.toDateString()%></span>
                         </div>
-                        <div class="blog__description mb-5">
-                            <p><%= blog.body.substring(0,100)%>...</p>
+                        <div class="blog__description mb-4">
+                            <p><%= blog.body.substring(0,50)%>...</p>
                         </div>
                         <div class="blog__extra mb-5">
-                            <a href="/blogs/<%=blog._id%>" class="btn btn-dark rounded-pill button">Read More &rarr; </a>
+                            <a href="/blogs/<%=blog._id%>" class="btn btn-outline-primary rounded-pill button">Read More </a>
                         </div>
                     </div>
                     
                    
                 </div>
-            <% }); %>
+            <%}); %>
         </div>
     </div>
-</div>
+    
 <% include ./partials/footer %>
