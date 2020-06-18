@@ -1,8 +1,5 @@
 <% include ./partials/header %>
     <div class="content container"> 
-        <!-- <h1 class="display-2">
-        RESTful Blog App <i class="fas fa-dog"></i>
-        <h1> -->
         <div class="items container">
             <%blogs.forEach((blog) => {%>
                 <div class="item">
@@ -17,12 +14,10 @@
                         <div class="blog__description mb-4">
                             <p><%= blog.body.substring(0,50)%>...</p>
                         </div>
-                        <div class="blog__extra mb-5">
+                        <div class="blog__extra">
                             <a href="/blogs/<%=blog._id%>" class="btn btn-outline-primary rounded-pill button">Read More </a>
                         </div>
-                    </div>
-                    
-                   
+                    </div> 
                 </div>
             <%}); %>
         </div>

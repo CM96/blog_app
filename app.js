@@ -33,11 +33,11 @@ app.use(session({
 // passport coming in....has to be after express session
 app.use(passport.initialize());
 app.use(passport.session());
-app.use(function(req, res, next){ //will be use in every route
+app.use(function(req, res, next){ //will be used in every route
     res.locals.currentUser=req.user;
     res.locals.error=req.flash("error");
     res.locals.success=req.flash("success");
-    
+    res.locals.authenticatedUser = req.isAuthenticated();
     next();//important for middlewares!!!
 });
 passportConfig(passport)
@@ -78,7 +78,6 @@ app.get("/blogs/:id", checkAuth.isLoggedIn,(req,res)=>{
         if(err) {
             res.redirect("/blogs");
         }else{
-            //redirect to the index
             res.render("show", {blog:foundBlog});
         }
    });
@@ -123,15 +122,8 @@ app.delete("/blogs/:id", checkAuth.isLoggedIn,(req,res)=>{
  app.get('/login',checkAuth.noReturn, (req, res)=>{
      res.render('login');
  });
- //post: authenticate user
-// app.post('/login',
-//   passport.authenticate('local', 
-//   { successRedirect: '/',
-//     failureRedirect: '/login',
-//     failureFlash: true })
-// );
 app.post('/login', passport.authenticate("local",{
-    successRedirect:"/",
+    successRedirect:"/blogs",
     failureRedirect:"/login"
 
 }),
@@ -141,7 +133,7 @@ app.post('/login', passport.authenticate("local",{
 app.get('/logout',checkAuth.isLoggedIn, (req,res)=>{
     req.logOut();
     req.flash('logged out');
-    res.redirect('/login')
+    res.redirect('/')
 });
  // REGISTER ROUTES
  app.get('/register', (req, res)=>{

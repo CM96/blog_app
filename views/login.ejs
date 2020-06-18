@@ -1,13 +1,13 @@
 <% include ./partials/header %>
-<section>
-    <h1 id="form-header">Sign In</h1>
+<section class="form ">
     <div id="login-form">
-        <form action="/login" method="POST"  class="container">
+        <h1 id="form-header">Sign In <i class="fas fa-cat"></i></h1>
+        <form action="/login" method="POST"  class="login-content">
             <label for="username">Username</label>
             <input type="text" name="username" minlength="6">
             <label for="password">Password</label>
             <input type="password" name="password" minlength="6" >
-            <button class="btn btn-primary">Login</button>
+            <button>Login</button>
         </form>
     </div>
 </section>
