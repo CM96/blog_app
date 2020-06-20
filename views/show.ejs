@@ -1,13 +1,13 @@
 <% include ./partials/header %>
-<div class="container">
-    <h1 class=" display-2"><%= blog.title%></h1>
-    <div class="content container">
-        <div class="item">
+<div class="blog-view ">
+    <div class="blog-content">
+        <h1 class=" display-2"><%= blog.title%></h1>
+        <div class="content-image">
             <img src="<%= blog.image%>" alt="blog image" class="item__image">
-            <div class="item__content mt-4">
+            <div class="content-date mt-4">
                 <span><%= blog.created.toDateString() %></span>
             </div>
-            <div class="item__description my-4">
+            <div class="content-description my-4">
                 <p><%= blog.body%></p>
             </div>
             <a class="btn btn-outline-success my-3 rounded-pill" href="/blogs/<%= blog._id%>/edit">Edit</a>

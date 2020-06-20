@@ -14,7 +14,7 @@ const express     =  require("express"),
       Blog        = require('./models/blog'),
       User        = require ('./models/user');
 
-mongoose.connect('mongodb://localhost/restful_blog_app', { useNewUrlParser: true });
+mongoose.connect('mongodb://localhost/restful_blog_app', { useNewUrlParser: true , useUnifiedTopology: true });
 mongoose.set('useFindAndModify', false);
 app.set("view engine", "ejs");
 app.use(express.static("public"));
@@ -64,9 +64,15 @@ app.get("/blogs/new", checkAuth.isLoggedIn,(req,res)=>{
 //CREATE ROUTE
 app.post("/blogs",checkAuth.isLoggedIn, (req,res)=>{
     //create blog
-    req.body.blog.body =req.sanitize(req.body.blog.body);//? could use destructuring
-    Blog.create(req.body.blog,(err,newblog)=>{
+    let newBlog = req.body.blog;
+    let blogAuthor={
+        id:req.user._id,
+        username:req.user.username
+    };
+    newBlog.author=blogAuthor;
+    Blog.create(newBlog,(err,newblog)=>{
         if(err) {
+            console.log('SOmething went wrong')
             res.render("new");
         }else{
             res.redirect("/blogs");
@@ -83,7 +89,7 @@ app.get("/blogs/:id", checkAuth.isLoggedIn,(req,res)=>{
    });
 });
 //EDIT ROUTE
-app.get("/blogs/:id/edit", checkAuth.isLoggedIn,(req,res)=>{
+app.get("/blogs/:id/edit", checkAuth.isLoggedIn, checkAuth.ownerShipTest,(req,res)=>{
     Blog.findById(req.params.id, (err,foundBlog)=>{
          if(err) {
              res.redirect("/blogs");

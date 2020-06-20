@@ -1,0 +1,83 @@
+/* LOGIN FORM */
+.form{
+    position: absolute;
+    top:50%;
+    left:50%;
+    transform: translate(-50%,-50%);
+    border-radius: 2rem;
+    width: 75%;
+    height: 75%;
+    padding:0;
+    color:$color-initial;
+    background-image: url(../images/cat2.jpg);
+    background-position: right;
+    background-repeat: no-repeat;
+    background-size: cover;
+    box-shadow: .3rem .3rem .7rem rgba(41,43,44,0.7);
+    #login-form {
+        position: absolute;
+        left:-5%;
+        top:9%;
+        padding: 5px;
+        overflow: visible;
+        font-size: 1.7rem;
+        width: 50%;
+        height: 80%;
+        background: #667db6; 
+        background: -webkit-linear-gradient(to right, #667db6, #0082c8, #0082c8, #667db6); 
+        background: linear-gradient(to right, #667db6, #0082c8, #0082c8, #667db6); 
+        border-radius: 2rem;
+        z-index: 8;
+        display: flex;
+        flex-direction: column;
+        padding: 0 0 0 5rem;
+
+        #form-header{
+            font-size: 3.5rem;
+            margin: 3rem 0 3rem 0;
+            color: inherit;
+        
+        }
+        .login-content{
+            input{
+                background-color: $color-general-bg;
+                border-radius: .7rem;
+                width: 85%;
+                height: 25%;
+                border: none;
+                margin-bottom: 2px;
+                padding: .5rem;
+                transition: all .2s ease-in-out;
+                &:focus{
+                    outline: none;
+                }
+                &:invalid{
+                    border-bottom: .7rem solid orangered;
+                }
+
+            }
+            button{
+                position: relative;
+                background-color: $color-general-bg;
+                margin-top: 3rem;
+                width: 15%;
+                height: 20%;
+                color:$color-primary;
+                border-radius: .2rem;
+                z-index: 1;
+                border:none;
+                &:hover{
+                    color:$color-initial;
+                }
+                &:after{
+                    @include buttonAfter;
+                }
+                &:hover:after{
+                    @include buttonHoverAfter;
+                    
+                }
+            }
+        }
+
+    }
+}

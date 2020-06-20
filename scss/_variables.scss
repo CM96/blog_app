@@ -1,0 +1,24 @@
+// COLOR CHOICES
+$color-general-bg:rgb(241, 238, 238);
+$color-primary: #6c63ff;
+$color-primary-border:rgba(36, 26, 226, 0.7);
+$color-initial: white;
+$color-gray-light:rgb(241, 238, 238);
+$color-primary-button:#12c2e9;
+$color-gray-shadow:rgba(120,120,120,0.7);
+
+@mixin buttonAfter{
+    content: ' ';
+    position: absolute;
+    height: 100%;
+    width: 0;
+    left: 0;
+    top: 0;
+    z-index: -1;
+    background: $color-primary-button; 
+    transition: all .4s ease-in-out;
+    
+}
+@mixin buttonHoverAfter {
+    width: 100%;    
+}
