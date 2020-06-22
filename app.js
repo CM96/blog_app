@@ -75,6 +75,15 @@ app.post("/blogs",checkAuth.isLoggedIn, (req,res)=>{
             console.log('SOmething went wrong')
             res.render("new");
         }else{
+            //save author info
+            User.findOne({_id: blogAuthor.id}, (err,user)=>{
+                if(err) console.log(`Something went wrong ${err}`);
+                else{
+                    user.blogs.push(newblog);
+                    user.save();
+                }
+            });
+            
             res.redirect("/blogs");
         }
     });
@@ -113,7 +122,7 @@ app.get("/blogs/:id/edit", checkAuth.isLoggedIn, checkAuth.ownerShipTest,(req,re
  });
  //DELETE ROUTE
 
-app.delete("/blogs/:id", checkAuth.isLoggedIn,(req,res)=>{
+app.delete("/blogs/:id", checkAuth.isLoggedIn,checkAuth.ownerShipTest,(req,res)=>{
     Blog.findByIdAndRemove(req.params.id, (err,foundBlog)=>{
          if(err) {
              res.redirect("/blogs");
@@ -191,7 +200,6 @@ app.get('/logout',checkAuth.isLoggedIn, (req,res)=>{
            
         })
         .catch(err=>console.log(err));//error tr
-    // res.redirect('/login');
     }
 });
 //server listening
