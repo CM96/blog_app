@@ -1,9 +1,9 @@
 <%= blog.title%>
 <% include ./partials/header %>
 
-<div class="container ">
+<div class="container new-form">
     <h1 class="display-2">Edit <%= blog.title%></h1>
-    <form action="/blogs/<%=blog._id%>?_method=PUT" method="POST" class="ui form">
+    <form action="/blogs/<%=blog._id%>?_method=PUT" method="POST" class="blog-form container mt-2">
         <div class="field">
             <label for="">Title</label>
             <input type="text" name="blog[title]" value="<%=blog.title%>">
@@ -18,7 +18,7 @@
             <label for="">Body</label>
             <textarea name="blog[body]" required><%=blog.body%></textarea>
         </div>
-        <input type="submit" class="btn btn-dark rounded-pill">
+        <input type="submit">
     </form>
 </div>
 <% include ./partials/footer %>

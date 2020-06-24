@@ -15,10 +15,15 @@ $color-gray-shadow:rgba(120,120,120,0.7);
     left: 0;
     top: 0;
     z-index: -1;
-    background: $color-primary-button; 
+    background: $color-primary; 
     transition: all .4s ease-in-out;
     
 }
 @mixin buttonHoverAfter {
     width: 100%;    
+}
+@mixin deviceSM{
+    @media screen and (min-width:360px){
+        @content;
+    }
 }

@@ -6,16 +6,16 @@
                     <div class="blog__image">
                         <img src="<%= blog.image%>" alt="blog image" >
                     </div>
-                    <div class="blog__content mt-5">
-                        <a href="/blogs/<%= blog._id%>" class="header display-2"><%= blog.title%></a>
-                        <div class="meta mt-3">
+                    <div class="blog__content">
+                        <a href="/blogs/<%= blog._id%>" class="header"><%= blog.title%></a>
+                        <div class="meta ">
                             <span><%= blog.created.toDateString()%></span>
                         </div>
-                        <div class="blog__description mb-4">
-                            <p><%= blog.body.substring(0,50)%>...</p>
+                        <div class="blog__author">
+                            <p>by <%= blog.author.username%></p>
                         </div>
-                        <div class="blog__extra">
-                            <a href="/blogs/<%=blog._id%>" class="btn btn-outline-primary rounded-pill button">Read More </a>
+                        <div class="blog__extra mt-2">
+                            <a href="/blogs/<%=blog._id%>" class="btn btn-outline-primary rounded-pill button">Read Blog </a>
                         </div>
                     </div> 
                 </div>

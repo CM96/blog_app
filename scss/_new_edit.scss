@@ -1,0 +1,56 @@
+/* NEW  FORM*/
+.new-form{
+    position:absolute;
+    top:8rem;
+    h1{
+        color:$color-primary;
+    }
+    .blog-form{
+        position: relative;
+        margin-bottom: 5rem;
+        .field{
+            padding: 1rem;
+            margin:1rem 0;
+            font-size: 1.6rem;
+            border-radius: 1rem;
+            label{
+                display: block;
+            }
+
+            input,textarea{
+                width:80%;
+                padding:1rem;
+                border-radius:1rem;
+                border:none;
+                box-shadow: .2rem .3rem .3rem $color-gray-shadow;
+                transition:all .2s linear;
+            }
+            input:focus, textarea:focus{
+                outline: none;
+                border:.2rem solid $color-primary;
+                box-shadow: .2rem .3rem 1.5rem rgba(108, 99, 255,0.7); 
+            }
+            textarea{
+                height:40rem;
+            }
+        }
+    }
+    input[type="submit"]{
+        position: relative;
+        height: 3.5rem;
+        width: 12rem;
+        padding: .3rem auto;
+        margin:1rem;
+        font-size: 1.6rem;
+        background-color: $color-initial;
+        border-radius: 1rem;
+        z-index: 1;
+        border:.1rem solid $color-primary-border;
+        box-shadow: .2rem .1rem .4rem rgba(108, 99, 255,0.7);
+        transition:all .2s ease-in-out;
+        &:hover{
+            color:$color-initial;
+            background-color: $color-primary;
+        }
+    }
+}

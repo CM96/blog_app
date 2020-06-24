@@ -2,22 +2,22 @@
 
 <div class="container new-form">
     <h1 class="display-2 header">New blog</h1>
-    <form action="/blogs" method="POST" class="form container">
+    <form action="/blogs" method="POST" class="blog-form container mt-2">
         <div class="field">
             <label for="">Title</label>
-            <input type="text" name="blog[title]" placeholder="title">
+            <input type="text" name="blog[title]" placeholder="Blog Title">
 
         </div>
         <div class="field">
             <label for="">Image Url</label>
-            <input type="text" name="blog[image]" placeholder="image url">
+            <input type="text" name="blog[image]" placeholder="Enter Image Url">
 
         </div>
         <div class="field">
             <label for="">Body</label>
             <textarea name="blog[body]" required></textarea>
         </div>
-        <input type="submit" class="btn btn-dark rounded-pill">
+        <input type="submit">
     </form>
 </div>
 <% include ./partials/footer %>

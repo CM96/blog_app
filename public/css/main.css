@@ -97,7 +97,7 @@
         left: 0;
         top: 0;
         z-index: -1;
-        background: #12c2e9;
+        background: #6c63ff;
         transition: all .4s ease-in-out; }
       .form #login-form .login-content button:hover:after {
         width: 100%; }
@@ -173,7 +173,7 @@
         left: 0;
         top: 0;
         z-index: -1;
-        background: #12c2e9;
+        background: #6c63ff;
         transition: all .4s ease-in-out; }
       .register-form #login-form .login-content button:hover:after {
         width: 100%; }
@@ -238,7 +238,7 @@ body section {
   left: 0;
   top: 0;
   z-index: -1;
-  background: #12c2e9;
+  background: #6c63ff;
   transition: all .4s ease-in-out; }
 
 .home__button:hover > a {
@@ -290,12 +290,18 @@ body section {
 .item .blog__content {
   font-size: 1.6rem;
   position: absolute;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-evenly;
   width: 50%;
   height: 50%;
   right: 0;
   top: 20%; }
 
 .blog__content .header {
+  text-transform: capitalize;
   font-size: 1.7rem;
   color: black;
   text-decoration: none;
@@ -311,64 +317,69 @@ body section {
   padding: .5rem; }
 
 /* +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
-/* NEW  FORM*/
-input, label {
-  display: block; }
-
-.form input[type="submit"] {
-  font-size: 1.7rem;
-  margin-left: 1.4rem; }
-
-.form .field {
-  padding: 1.5rem; }
-
-.field input[type="text"] {
-  width: 40%;
-  padding: .7rem;
-  border-radius: .8rem; }
-
-.field input[type="text"]:focus {
-  outline: none;
-  border-bottom: 2px solid #2b2a2a;
-  box-shadow: 0 0.5rem 2rem rgba(120, 120, 120, 0.7); }
-
-.field textarea {
-  width: 40%;
-  padding: 1rem;
-  border-radius: .8rem; }
-
-.field textarea:focus {
-  outline: none;
-  border-bottom: 2px solid #2b2a2a;
-  box-shadow: 0 0.5rem 2rem rgba(120, 120, 120, 0.7); }
-
-/* +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
 /* SHOW ROUTE*/
 .blog-view {
-  position: relative;
-  background-color: blue;
-  font-size: 1.6rem; }
+  position: relative; }
   .blog-view .blog-content {
     position: absolute;
-    border: 2px solid black;
-    top: 50%;
-    left: 50%;
-    width: 90%;
-    height: 100%;
-    transform: translate(-50%, -50%);
-    border: 2px solid black; }
+    top: 6rem;
+    left: 0;
+    width: 100%; }
+    .blog-view .blog-content div {
+      font-size: 1.6rem; }
+    .blog-view .blog-content-image {
+      position: relative;
+      width: 80%;
+      height: 40rem;
+      border-radius: 2rem;
+      margin: 1rem auto; }
+    .blog-view .blog-content-date {
+      font-weight: 500; }
+    .blog-view .blog-content-author {
+      text-transform: capitalize; }
 
-/* RESPONSIVENESS */
-@media screen and (max-width: 768px) {
-  .item .blog__image {
-    overflow: hidden; }
-  .item .blog__image img {
-    width: 100%;
-    height: 20rem; } }
-
-@media screen and (min-width: 769px) and (max-width: 1170px) {
-  .item .blog__image {
-    overflow: hidden; }
-  .item .blog__image img {
-    width: 100%;
-    height: 35rem; } }
+/* NEW  FORM*/
+.new-form {
+  position: absolute;
+  top: 8rem; }
+  .new-form h1 {
+    color: #6c63ff; }
+  .new-form .blog-form {
+    position: relative;
+    margin-bottom: 5rem; }
+    .new-form .blog-form .field {
+      padding: 1rem;
+      margin: 1rem 0;
+      font-size: 1.6rem;
+      border-radius: 1rem; }
+      .new-form .blog-form .field label {
+        display: block; }
+      .new-form .blog-form .field input, .new-form .blog-form .field textarea {
+        width: 80%;
+        padding: 1rem;
+        border-radius: 1rem;
+        border: none;
+        box-shadow: 0.2rem 0.3rem 0.3rem rgba(120, 120, 120, 0.7);
+        transition: all .2s linear; }
+      .new-form .blog-form .field input:focus, .new-form .blog-form .field textarea:focus {
+        outline: none;
+        border: 0.2rem solid #6c63ff;
+        box-shadow: 0.2rem 0.3rem 1.5rem rgba(108, 99, 255, 0.7); }
+      .new-form .blog-form .field textarea {
+        height: 40rem; }
+  .new-form input[type="submit"] {
+    position: relative;
+    height: 3.5rem;
+    width: 12rem;
+    padding: .3rem auto;
+    margin: 1rem;
+    font-size: 1.6rem;
+    background-color: white;
+    border-radius: 1rem;
+    z-index: 1;
+    border: 0.1rem solid rgba(36, 26, 226, 0.7);
+    box-shadow: 0.2rem 0.1rem 0.4rem rgba(108, 99, 255, 0.7);
+    transition: all .2s ease-in-out; }
+    .new-form input[type="submit"]:hover {
+      color: white;
+      background-color: #6c63ff; }

@@ -88,12 +88,14 @@ app.post("/blogs",checkAuth.isLoggedIn, (req,res)=>{
         }
     });
 });
+//BLOG SHOW ROUTE
 app.get("/blogs/:id", checkAuth.isLoggedIn,(req,res)=>{
    Blog.findById(req.params.id, (err,foundBlog)=>{
         if(err) {
             res.redirect("/blogs");
         }else{
-            res.render("show", {blog:foundBlog});
+            let hasAuthor= foundBlog.author ? true: false;
+            res.render("show", {blog:foundBlog, hasAuthor});
         }
    });
 });
@@ -157,11 +159,12 @@ app.get('/logout',checkAuth.isLoggedIn, (req,res)=>{
  //post: register user
  app.post('/register', (req, res)=>{
      const {username, email, password, password2}= req.body;
+     console.log(req.body);
      const errors=[];
       //error checking
     if(!email || !username || !password2 || !password) 
         errors.push('Missing information in some fields');
-    if(password !=password2)
+    if(password !== password2)
         errors.push('password do not match');
     if(password.length< 6)
         errors.push('password too short');
@@ -192,6 +195,7 @@ app.get('/logout',checkAuth.isLoggedIn, (req,res)=>{
                     newUser.save()
                     .then(user=>{
                         //redirect to login page so user could login
+                        console.log(`New User \n ${user}`);
                         res.redirect('/login');
                     })
                     .catch(err=>console.log(err))
