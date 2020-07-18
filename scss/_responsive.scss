@@ -1,0 +1,163 @@
+@include deviceXSM{
+    .navbar{
+        background-color: chocolate;
+    }
+}
+// GREEN  PHONES
+
+@include deviceSM{
+    .navbar{
+        background-color: green;
+    }
+    /* HOME PAGE */
+    .home{
+        background-position: center;
+        &__text{
+            margin-top:0;
+            padding: 0;
+            border:1px solid black;
+            h1{
+                transform: scale(.7);
+            }
+        }
+        &__button{
+            margin-top: -3rem;
+        }
+    }
+    /* BLOGS PAGE */
+    /* HEADER */
+    .content {
+        .items {
+            grid-template-columns: 1fr;
+        }
+    }
+    /* LOGIN FORM */
+    .form{
+        width: 100%;
+        height: 100%;
+        border-radius: initial;
+        background: none;
+        #login-form {
+            border-radius: initial;
+            left:0;
+            top:5%;
+            width: 100%;
+            height: 75%;
+            padding: 0 0 0 2rem;
+            .login-content{
+                label{
+                    display: block;
+                }
+                input{
+                    width: 50%;
+                }
+                button{
+                    display: block;
+                }
+            }
+
+        }
+    }
+    /* REGISTER FORM */
+    .register-form{
+        width: 100%;
+        height: 100%;
+        border-radius: initial;
+        background: none;
+        #login-form {
+            height: 75%;
+            width: 100%;
+            border-radius: initial;
+            left: 0;
+            top:5%;
+            padding: 0 0 0 4rem;
+            .login-content{
+                input{
+                    margin-bottom: 1rem;
+                    width: 50%;
+                }
+                button{
+                    display: block;
+                    margin-top: 1.5rem;
+                    
+                }
+            }
+        }
+    }
+
+}
+// BLUE MEDIUM DEVICES
+@include deviceMd{
+
+    .navbar{
+        background-color: blue;
+    }
+    /* HOME PAGE */
+    .home{
+        &__text{
+            margin-top:2%;
+            padding: 1.3rem;
+            h1{
+                transform: scale(.9);
+            }
+        }
+    }
+    /* BLOGS PAGE */
+    /* HEADER */
+    .content {
+        .items {
+            grid-template-columns: 1fr;
+        }
+    }
+    /* LOGIN FORM */
+    .form{
+        width: 80%;
+        height: 80%;
+        #login-form {
+            left:-10%;
+            overflow: visible;
+            .login-content{
+                button{
+                    width: 20%;
+                }
+            }
+
+        }
+    }
+    /* REGISTER FORM */
+    .register-form{
+        width: 88%;
+        #login-form {
+
+            #form-header{
+                font-size: 3.5rem;
+                margin: 3rem 0 3rem 0;
+                color: inherit;
+            
+            }
+            .login-content{
+                input{
+                    margin-bottom: 1rem;
+                }
+                button{
+                    margin-top: 2rem;
+                    width: 30%;
+                }
+            }
+        }
+    }
+
+
+}
+// RED LARGE DEVICES
+@include deviceLg{
+    .navbar{
+        background-color: red;
+    }
+}
+// NORMAL FOR EXTRA LARGE
+@include deviceXLg{
+    .navbar{
+        background-color: $color-primary;
+    }
+}

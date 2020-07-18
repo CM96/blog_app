@@ -1,4 +1,4 @@
-/* LOGIN FORM */
+/* REGISTER FORM */
 .register-form{
     position: absolute;
     top:50%;
@@ -9,6 +9,7 @@
     height: 85%;
     padding:0;
     color:$color-initial;
+    font-size: 1.7rem;
     background-image: url(../images/dof.jpg);
     background-position: right;
     background-repeat: no-repeat;
@@ -20,7 +21,6 @@
         top:5%;
         padding: 5px;
         overflow: visible;
-        font-size: 1.7rem;
         width: 50%;
         height: 90%;
         background: #667db6; 
@@ -56,6 +56,9 @@
                 }
 
             }
+            label{
+                display: block;
+            }
             button{
                 font-size: 1.6rem;
                 position: relative;
@@ -64,6 +67,7 @@
                 width: 20%;
                 height: 13%;
                 color:$color-primary;
+                padding: 1rem;
                 border-radius: .2rem;
                 z-index: 1;
                 border:none;

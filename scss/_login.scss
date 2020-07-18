@@ -12,6 +12,7 @@
     background-image: url(../images/cat2.jpg);
     background-position: right;
     background-repeat: no-repeat;
+    font-size: 1.7rem;
     background-size: cover;
     box-shadow: .3rem .3rem .7rem rgba(41,43,44,0.7);
     #login-form {
@@ -20,7 +21,6 @@
         top:9%;
         padding: 5px;
         overflow: visible;
-        font-size: 1.7rem;
         width: 50%;
         height: 80%;
         background: #667db6; 
@@ -43,9 +43,9 @@
                 background-color: $color-general-bg;
                 border-radius: .7rem;
                 width: 85%;
-                height: 25%;
+                height: 20%;
                 border: none;
-                margin-bottom: 2px;
+                margin-bottom: 1.5rem;
                 padding: .5rem;
                 transition: all .2s ease-in-out;
                 &:focus{

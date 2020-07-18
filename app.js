@@ -73,17 +73,20 @@ app.post("/blogs",checkAuth.isLoggedIn, (req,res)=>{
     Blog.create(newBlog,(err,newblog)=>{
         if(err) {
             console.log('SOmething went wrong')
+            req.flash('error','Something went wrong');
             res.render("new");
         }else{
             //save author info
             User.findOne({_id: blogAuthor.id}, (err,user)=>{
-                if(err) console.log(`Something went wrong ${err}`);
-                else{
+                if(err) {
+                    console.log(`Something went wrong ${err}`);
+                    req.flash('error', 'Creator does not exist in the database');
+
+                }else{
                     user.blogs.push(newblog);
                     user.save();
                 }
             });
-            
             res.redirect("/blogs");
         }
     });
@@ -92,6 +95,7 @@ app.post("/blogs",checkAuth.isLoggedIn, (req,res)=>{
 app.get("/blogs/:id", checkAuth.isLoggedIn,(req,res)=>{
    Blog.findById(req.params.id, (err,foundBlog)=>{
         if(err) {
+            req.flash('error','This blog does not exist in our database');
             res.redirect("/blogs");
         }else{
             let hasAuthor= foundBlog.author ? true: false;
@@ -103,6 +107,7 @@ app.get("/blogs/:id", checkAuth.isLoggedIn,(req,res)=>{
 app.get("/blogs/:id/edit", checkAuth.isLoggedIn, checkAuth.ownerShipTest,(req,res)=>{
     Blog.findById(req.params.id, (err,foundBlog)=>{
          if(err) {
+             req.flash('error','You need to sign in to do that');
              res.redirect("/blogs");
          }else{
              res.render("edit", {blog: foundBlog});
@@ -116,6 +121,7 @@ app.get("/blogs/:id/edit", checkAuth.isLoggedIn, checkAuth.ownerShipTest,(req,re
     req.body.blog.body =req.sanitize(req.body.blog.body);
     Blog.findByIdAndUpdate(req.params.id, req.body.blog, (err,updatedBlog)=>{
          if(err) {
+            req.flash('error','Something went wrong');
              res.redirect("/blogs");
          }else{
              res.redirect("/blogs/"+req.params.id);
@@ -127,7 +133,8 @@ app.get("/blogs/:id/edit", checkAuth.isLoggedIn, checkAuth.ownerShipTest,(req,re
 app.delete("/blogs/:id", checkAuth.isLoggedIn,checkAuth.ownerShipTest,(req,res)=>{
     Blog.findByIdAndRemove(req.params.id, (err,foundBlog)=>{
          if(err) {
-             res.redirect("/blogs");
+            req.flash('error','Something went wrong, please retry!');
+             res.redirect("/blogs/:id");
          }else{
              res.redirect("/blogs");
          }
@@ -141,7 +148,8 @@ app.delete("/blogs/:id", checkAuth.isLoggedIn,checkAuth.ownerShipTest,(req,res)=
  });
 app.post('/login', passport.authenticate("local",{
     successRedirect:"/blogs",
-    failureRedirect:"/login"
+    failureRedirect:"/login",
+    failureFlash:true
 
 }),
 (req,res)=>{
@@ -149,11 +157,11 @@ app.post('/login', passport.authenticate("local",{
 });
 app.get('/logout',checkAuth.isLoggedIn, (req,res)=>{
     req.logOut();
-    req.flash('logged out');
+    req.flash('success','successfully logged out');
     res.redirect('/')
 });
  // REGISTER ROUTES
- app.get('/register', (req, res)=>{
+ app.get('/register', checkAuth.noReturn,(req, res)=>{
     res.render('register');
 });
  //post: register user
@@ -175,33 +183,36 @@ app.get('/logout',checkAuth.isLoggedIn, (req,res)=>{
     }
     //otherwise check if user exists
     else{
-        User.findOne({email:email})
+        User.findOne({email:email, username:username})
         .then(user=>{
             if(user) {
                 console.log('user exists');//check if there is a user in the db with that email
+                req.flash('error', 'A user with that email or username already exists ');
+                res.redirect('back');//re-render form because there is a user
             }
-            let newUser=new User({
-                username,
-                email,
-                password,
-                password2
-            });
-            bcrypt.genSalt(10, function(err, salt) {
-                bcrypt.hash(password, salt, function(err, hash) {
-                    if(err) console.log(err);
-                    // Store hash in your password DB.
-                    newUser.password=hash;
-                    //insert user in database
-                    newUser.save()
-                    .then(user=>{
-                        //redirect to login page so user could login
-                        console.log(`New User \n ${user}`);
-                        res.redirect('/login');
-                    })
-                    .catch(err=>console.log(err))
+            else{
+                let newUser=new User({
+                    username,
+                    email,
+                    password,
+                    password2
                 });
-            });
-           
+                bcrypt.genSalt(10, function(err, salt) {
+                    bcrypt.hash(password, salt, function(err, hash) {
+                        if(err) console.log(err);
+                        // Store hash in your password DB.
+                        newUser.password=hash;
+                        //insert user in database
+                        newUser.save()
+                        .then(user=>{
+                            //redirect to login page so user could login
+                            console.log(`New User \n ${user}`);
+                            res.redirect('/login');
+                        })
+                        .catch(err=>console.log(err))
+                    });
+                });
+            }
         })
         .catch(err=>console.log(err));//error tr
     }

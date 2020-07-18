@@ -1,17 +1,11 @@
-.navigation {
-  padding: 1.5rem 2rem;
-  position: fixed;
-  display: flex;
-  align-items: center;
-  background-color: #6c63ff;
+.navbar {
   font-size: 1.7rem;
-  z-index: 4;
-  width: 100%; }
-  .navigation .nav-item {
+  background-color: #6c63ff;
+  z-index: 50; }
+  .navbar .navbar-collapse ul.navbar-nav li a {
     position: relative;
-    margin-right: 2rem;
-    color: #f1eeee; }
-    .navigation .nav-item:after {
+    color: white; }
+    .navbar .navbar-collapse ul.navbar-nav li a:after {
       content: '';
       position: absolute;
       left: 45%;
@@ -21,9 +15,7 @@
       opacity: 0;
       background-color: #f1eeee;
       transition: all .3s ease-in; }
-    .navigation .nav-item:hover {
-      text-decoration: none; }
-    .navigation .nav-item:hover:after {
+    .navbar .navbar-collapse ul.navbar-nav li a:hover:after {
       transform: scaleX(5);
       opacity: 1; }
 
@@ -41,6 +33,7 @@
   background-image: url(../images/cat2.jpg);
   background-position: right;
   background-repeat: no-repeat;
+  font-size: 1.7rem;
   background-size: cover;
   box-shadow: 0.3rem 0.3rem 0.7rem rgba(41, 43, 44, 0.7); }
   .form #login-form {
@@ -49,7 +42,6 @@
     top: 9%;
     padding: 5px;
     overflow: visible;
-    font-size: 1.7rem;
     width: 50%;
     height: 80%;
     background: #667db6;
@@ -68,9 +60,9 @@
       background-color: #f1eeee;
       border-radius: .7rem;
       width: 85%;
-      height: 25%;
+      height: 20%;
       border: none;
-      margin-bottom: 2px;
+      margin-bottom: 1.5rem;
       padding: .5rem;
       transition: all .2s ease-in-out; }
       .form #login-form .login-content input:focus {
@@ -102,7 +94,7 @@
       .form #login-form .login-content button:hover:after {
         width: 100%; }
 
-/* LOGIN FORM */
+/* REGISTER FORM */
 .register-form {
   position: absolute;
   top: 50%;
@@ -113,6 +105,7 @@
   height: 85%;
   padding: 0;
   color: white;
+  font-size: 1.7rem;
   background-image: url(../images/dof.jpg);
   background-position: right;
   background-repeat: no-repeat;
@@ -124,7 +117,6 @@
     top: 5%;
     padding: 5px;
     overflow: visible;
-    font-size: 1.7rem;
     width: 50%;
     height: 90%;
     background: #667db6;
@@ -152,6 +144,8 @@
         outline: none; }
       .register-form #login-form .login-content input:invalid {
         border-bottom: .7rem solid orangered; }
+    .register-form #login-form .login-content label {
+      display: block; }
     .register-form #login-form .login-content button {
       font-size: 1.6rem;
       position: relative;
@@ -160,6 +154,7 @@
       width: 20%;
       height: 13%;
       color: #6c63ff;
+      padding: 1rem;
       border-radius: .2rem;
       z-index: 1;
       border: none; }
@@ -209,14 +204,14 @@ body section {
   width: 30%;
   height: 50%;
   margin-top: 10%;
-  padding: 1.5rem; }
+  padding: 1.5rem;
+  font-size: 1.6rem; }
 
 .home__button {
   position: relative;
   height: 3.5rem;
   width: 12rem;
   padding: .4rem auto;
-  font-size: 1.6rem;
   border: 0.2rem solid rgba(36, 26, 226, 0.7);
   box-shadow: 0.2rem 0.1rem 0.4rem rgba(108, 99, 255, 0.7);
   /* color-primary*/ }
@@ -383,3 +378,107 @@ body section {
     .new-form input[type="submit"]:hover {
       color: white;
       background-color: #6c63ff; }
+
+@media screen and (min-width: 360px) and (max-width: 575.8px) {
+  .navbar {
+    background-color: chocolate; } }
+
+@media screen and (min-width: 576px) and (max-width: 767.8px) {
+  .navbar {
+    background-color: green; }
+  /* HOME PAGE */
+  .home {
+    background-position: center; }
+    .home__text {
+      margin-top: 0;
+      padding: 0;
+      border: 1px solid black; }
+      .home__text h1 {
+        transform: scale(0.7); }
+    .home__button {
+      margin-top: -3rem; }
+  /* BLOGS PAGE */
+  /* HEADER */
+  .content .items {
+    grid-template-columns: 1fr; }
+  /* LOGIN FORM */
+  .form {
+    width: 100%;
+    height: 100%;
+    border-radius: initial;
+    background: none; }
+    .form #login-form {
+      border-radius: initial;
+      left: 0;
+      top: 5%;
+      width: 100%;
+      height: 75%;
+      padding: 0 0 0 2rem; }
+      .form #login-form .login-content label {
+        display: block; }
+      .form #login-form .login-content input {
+        width: 50%; }
+      .form #login-form .login-content button {
+        display: block; }
+  /* REGISTER FORM */
+  .register-form {
+    width: 100%;
+    height: 100%;
+    border-radius: initial;
+    background: none; }
+    .register-form #login-form {
+      height: 75%;
+      width: 100%;
+      border-radius: initial;
+      left: 0;
+      top: 5%;
+      padding: 0 0 0 4rem; }
+      .register-form #login-form .login-content input {
+        margin-bottom: 1rem;
+        width: 50%; }
+      .register-form #login-form .login-content button {
+        display: block;
+        margin-top: 1.5rem; } }
+
+@media screen and (min-width: 768px) and (max-width: 991.8px) {
+  .navbar {
+    background-color: blue; }
+  /* HOME PAGE */
+  .home__text {
+    margin-top: 2%;
+    padding: 1.3rem; }
+    .home__text h1 {
+      transform: scale(0.9); }
+  /* BLOGS PAGE */
+  /* HEADER */
+  .content .items {
+    grid-template-columns: 1fr; }
+  /* LOGIN FORM */
+  .form {
+    width: 80%;
+    height: 80%; }
+    .form #login-form {
+      left: -10%;
+      overflow: visible; }
+      .form #login-form .login-content button {
+        width: 20%; }
+  /* REGISTER FORM */
+  .register-form {
+    width: 88%; }
+    .register-form #login-form #form-header {
+      font-size: 3.5rem;
+      margin: 3rem 0 3rem 0;
+      color: inherit; }
+    .register-form #login-form .login-content input {
+      margin-bottom: 1rem; }
+    .register-form #login-form .login-content button {
+      margin-top: 2rem;
+      width: 30%; } }
+
+@media screen and (min-width: 992px) and (max-width: 1199.8px) {
+  .navbar {
+    background-color: red; } }
+
+@media screen and (min-width: 1200px) {
+  .navbar {
+    background-color: #6c63ff; } }

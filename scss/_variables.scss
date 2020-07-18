@@ -7,6 +7,8 @@ $color-gray-light:rgb(241, 238, 238);
 $color-primary-button:#12c2e9;
 $color-gray-shadow:rgba(120,120,120,0.7);
 
+// BUTTON HOVER EFFECT
+
 @mixin buttonAfter{
     content: ' ';
     position: absolute;
@@ -22,8 +24,39 @@ $color-gray-shadow:rgba(120,120,120,0.7);
 @mixin buttonHoverAfter {
     width: 100%;    
 }
-@mixin deviceSM{
-    @media screen and (min-width:360px){
+
+// MEDIA QUERIES
+
+@mixin deviceXSM{
+    @media screen and (min-width:360px) and (max-width:575.8px) {
         @content;
     }
 }
+@mixin deviceSM{
+    // Small devices (landscape phones, 576px and up)
+    @media screen and (min-width: 576px) and (max-width: 767.8px) {
+        @content;
+    }
+}
+@mixin deviceMd {
+    // Medium devices (tablets, 768px and up)
+    @media screen and (min-width: 768px) and (max-width: 991.8px){ 
+        @content;
+    }
+}
+    
+@mixin deviceLg{
+    // Large devices (desktops, 992px and up)
+    @media screen and (min-width: 992px) and (max-width:1199.8px) { 
+        @content;
+     }
+
+}
+
+@mixin deviceXLg{
+    // Extra large devices (large desktops, 1200px and up)
+    @media screen and (min-width: 1200px) {
+        @content;
+    }
+}
+
